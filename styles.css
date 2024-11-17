@@ -1,0 +1,245 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: #87ceeb;
+  animation: dayNightCycle 20s infinite linear;
+}
+
+@keyframes dayNightCycle {
+  0% {
+    background: #87ceeb;
+  }
+  30% {
+    background: #4682b4;
+  }
+  35% {
+    background: #ffcc99;
+  }
+  45% {
+    background: #4a4a7d;
+  }
+  50% {
+    background: #1a1a2e;
+  }
+  85% {
+    background: #4a4a7d;
+  }
+  90% {
+    background: #ffcc99;
+  }
+  100% {
+    background: #87ceeb;
+  }
+}
+
+.blimp-body {
+  width: 400px;
+  height: 120px;
+  border-radius: 120px / 60px;
+  position: relative;
+  background: #f0f0f0;
+  box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.6);
+  animation: blimpShade 20s infinite;
+  animation-timing-function: linear;
+}
+
+.blimp-body::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 80px;
+  background: #f0f0f0;
+  border-radius: 0 100% 100% 0;
+  animation: blimpShade 20s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes blimpShade {
+  0% {
+    background: #f0f0f0;
+  }
+  30% {
+    background: #f0f0f0;
+  }
+  45% {
+    background: #d0d0d0;
+  }
+  85% {
+    background: #b0b0b0;
+  }
+  100% {
+    background: #f0f0f0;
+  }
+}
+
+.blimp-body::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+  width: 80%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.blimp {
+  position: relative;
+  z-index: 2;
+  animation: float 4s ease-in-out infinite, rock 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes rock {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.gondola {
+  position: absolute;
+  left: 150px;
+  width: 120px;
+  height: 35px;
+  background: #505050;
+  border-radius: 5px 5px 15px 15px;
+  position: relative;
+}
+
+.gondola::before,
+.gondola::after,
+.gondola > span {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  background: #a8e6ff;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: windowLight 20s infinite;
+  animation-timing-function: linear;
+}
+
+.gondola::before {
+  left: 15px;
+}
+.gondola > span {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.gondola::after {
+  right: 15px;
+}
+
+@keyframes windowLight {
+  0% {
+    background: #a8e6ff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  30% {
+    background: #a8e6ff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  45% {
+    background: #fff5b6;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 15px #ffeb3b;
+  }
+  85% {
+    background: #fff5b6;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 15px #ffeb3b;
+  }
+  100% {
+    background: #a8e6ff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.mountains {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 200px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mountain-group {
+  display: flex;
+  gap: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 200px;
+  animation: slideMountains 20s linear infinite;
+  align-items: flex-end;
+}
+
+.mountain-group:nth-child(2) {
+  left: 100%;
+  transform: translateX(-50px);
+}
+
+.mountain {
+  flex-shrink: 0;
+  width: 200px;
+  height: 150px;
+  background: rgb(30, 30, 30);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  filter: blur(1px);
+}
+
+.mountain:nth-child(3n) {
+  width: 180px;
+  height: 100px;
+  background: rgb(25, 25, 25);
+}
+
+.mountain:nth-child(3n + 1) {
+  width: 250px;
+  height: 200px;
+  background: rgb(35, 35, 35);
+}
+
+@keyframes slideMountains {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
